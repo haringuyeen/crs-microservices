@@ -28,4 +28,3 @@
 | GET | /registrations/my | Danh sách đăng ký của tôi | STUDENT |
 | DELETE | /registrations/{id} | Huỷ đăng ký (gọi ngầm release-seat) | STUDENT/ADMIN |
 
-*Lưu ý: Blueprint này sẽ được cập nhật dần qua các buổi – Buổi 1 chỉ cần điền đủ khung, chưa cần chính xác 100% vì sẽ tinh chỉnh khi code thật ở Buổi 2-4.*
