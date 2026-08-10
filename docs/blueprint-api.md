@@ -21,7 +21,7 @@
 | PATCH | /internal/courses/{id}/reserve-seat | Kiểm tra còn chỗ, trừ soChoConLai (transactional) |
 | PATCH | /internal/courses/{id}/release-seat | Hoàn trả 1 chỗ khi huỷ đăng ký |
 
-## registration-service (cổng 8083, tiền tố: /api/registrations)
+## registration-service (cổng 8085, tiền tố: /api/registrations)
 | Method | Endpoint | Mô tả | Yêu cầu |
 | :--- | :--- | :--- | :--- |
 | POST | /registrations | Đăng ký học phần (gọi ngầm sang course-service) | STUDENT |
