@@ -6,7 +6,7 @@
 | api-gateway | 8080 | (không có DB) | Điểm vào duy nhất, định tuyến, xác thực sơ bộ, CORS |
 | auth-service | 8081 | auth_db | Quản lý User, Student, đăng nhập, sinh/xác thực JWT |
 | course-service | 8082 | course_db | Quản lý Course, tìm kiếm, phân trang, quản lý số chỗ |
-| registration-service | 8083 | registration_db | Quản lý Registration, gọi sang course-service để đăng ký |
+| registration-service | 8085 | registration_db | Quản lý Registration, gọi sang course-service để đăng ký |
 
 ## 2. Nguyên tắc sở hữu dữ liệu (Data Ownership)
 * Mỗi service có DATABASE RIÊNG, KHÔNG service nào được truy cập trực tiếp DB của service khác.
