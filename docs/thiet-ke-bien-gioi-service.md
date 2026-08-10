@@ -18,5 +18,5 @@
 | :--- | :--- | :--- |
 | /api/auth/** | http://localhost:8081 | Public (login), phần còn lại cần JWT |
 | /api/courses/** | http://localhost:8082 | GET public, POST/PUT/DELETE cần role ADMIN |
-| /api/registrations/** | http://localhost:8083 | Cần JWT (STUDENT/ADMIN) |
+| /api/registrations/** | http://localhost:8085 | Cần JWT (STUDENT/ADMIN) |
 | /api/public/courses | http://localhost:8082 | Dùng API Key, dành cho đối tác ngoài |
