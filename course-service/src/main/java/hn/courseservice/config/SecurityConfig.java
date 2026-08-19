@@ -18,7 +18,6 @@ public class SecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
 
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -26,16 +25,16 @@ public class SecurityConfig {
                 .sessionManagement(sm ->
                         sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/internal/**").permitAll() // chi goi tu registration-service qua mang noi bo
-                                .requestMatchers(HttpMethod.GET,
-                                        "/courses/**").permitAll()
-                                .requestMatchers(HttpMethod.POST,
-                                        "/courses/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.PUT,
-                                        "/courses/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.DELETE,
-                                        "/courses/**").hasRole("ADMIN")
-                                .anyRequest().authenticated()
+                        .requestMatchers("/internal/**").permitAll() // chi goi tu registration-service qua mang noi bo
+                        .requestMatchers(HttpMethod.GET,
+                                "/courses/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,
+                                "/courses/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,
+                                "/courses/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,
+                                "/courses/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter,
                         UsernamePasswordAuthenticationFilter.class);
