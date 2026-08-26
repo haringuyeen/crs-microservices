@@ -1,11 +1,15 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { createContext, useContext, useState, type ReactNode } from 'react';
 import type { LoginResponse } from '../types/auth';
 
+// interface AuthUser {
+//     username: string;
+//     role: 'ADMIN' | 'STUDENT';
+// }
 interface AuthUser {
+    id: number;
     username: string;
     role: 'ADMIN' | 'STUDENT';
 }
-
 interface AuthContextValue {
     user: AuthUser | null;
     login: (data: LoginResponse) => void;
@@ -18,19 +22,24 @@ const TOKEN_KEY = 'crs_token';
 const USER_KEY = 'crs_user';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-    const [user, setUser] = useState<AuthUser | null>(null);
-
-    useEffect(() => {
-        const savedUser = localStorage.getItem(USER_KEY);
-        const savedToken = localStorage.getItem(TOKEN_KEY);
-        if (savedUser && savedToken) {
-            setUser(JSON.parse(savedUser));
+    const [user, setUser] = useState<AuthUser | null>(() => {
+        try {
+            const savedUser = localStorage.getItem(USER_KEY);
+            const savedToken = localStorage.getItem(TOKEN_KEY);
+            if (savedUser && savedToken) {
+                return JSON.parse(savedUser) as AuthUser;
+            }
+        } catch {
+            localStorage.removeItem(TOKEN_KEY);
+            localStorage.removeItem(USER_KEY);
         }
-    }, []);
+        return null;
+    });
 
     const login = (data: LoginResponse) => {
         localStorage.setItem(TOKEN_KEY, data.token);
-        const authUser: AuthUser = { username: data.username, role: data.role };
+        // const authUser: AuthUser = { username: data.username, role: data.role };
+        const authUser: AuthUser = { id: data.userId, username: data.username, role: data.role };
         localStorage.setItem(USER_KEY, JSON.stringify(authUser));
         setUser(authUser);
     };
