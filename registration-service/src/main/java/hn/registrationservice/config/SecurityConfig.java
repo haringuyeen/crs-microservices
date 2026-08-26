@@ -25,7 +25,7 @@ public class SecurityConfig {
 
                         sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/registrations/**").authenticated()
+                        .requestMatchers("/registrations", "/registrations/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .addFilterBefore(jwtAuthFilter,
