@@ -39,7 +39,7 @@ spring:
               predicates:
                 - Path=/api/registrations/**
               filters:
-                - RewritePath=/api/registrations/(?<segment>.*),/registrations/${segment}
+                - RewritePath=/api/registrations/(?<segment>.*), /registrations/${segment}
 
             - id: course-service-partner
               uri: http://localhost:8082
