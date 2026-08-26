@@ -44,6 +44,21 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                         Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
 
                 // Cú pháp mới cho JJWT 0.12.+
+//                Claims claims = Jwts.parser()
+//                        .verifyWith(key)
+//                        .build()
+//                        .parseSignedClaims(token)
+//                        .getPayload();
+//
+//                String username = claims.getSubject();
+//                String role = claims.get("role", String.class);
+//
+//                var authToken = new UsernamePasswordAuthenticationToken(
+//                        username, null, List.of(new
+//                        SimpleGrantedAuthority("ROLE_" + role))
+//                );
+//
+//                SecurityContextHolder.getContext().setAuthentication(authToken);
                 Claims claims = Jwts.parser()
                         .verifyWith(key)
                         .build()
@@ -52,10 +67,16 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
                 String username = claims.getSubject();
                 String role = claims.get("role", String.class);
+                Object userIdClaim = claims.get("userId");
+                Long userId = null;
+                if (userIdClaim instanceof Number number) {
+                    userId = number.longValue();
+                } else if (userIdClaim != null) {
+                    userId = Long.valueOf(userIdClaim.toString());
+                }
 
                 var authToken = new UsernamePasswordAuthenticationToken(
-                        username, null, List.of(new
-                        SimpleGrantedAuthority("ROLE_" + role))
+                        username, userId, List.of(new SimpleGrantedAuthority("ROLE_" + role))
                 );
 
                 SecurityContextHolder.getContext().setAuthentication(authToken);
